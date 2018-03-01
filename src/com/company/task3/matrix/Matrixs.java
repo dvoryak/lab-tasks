@@ -25,7 +25,7 @@ public class Matrixs {
 
 
     /**
-     * Multiple matrix columns of A on rows of B
+     * Multiple matrix
      *
      * 3 1
      * 2 4
@@ -40,6 +40,7 @@ public class Matrixs {
      * @return
      */
     public static Matrix multiplyMatrix(Matrix m1, Matrix m2) {
+        System.out.println("____SINGLE____");
         if(m1.getColumns() != m2.getRows()) throw new IllegalArgumentException();
 
         Matrix m = generateEmptyMatrix(m1.getRows(),m2.getColumns());
@@ -58,11 +59,14 @@ public class Matrixs {
     }
 
     public static Matrix paralelMultiplyMatrix(Matrix m1, Matrix m2) throws ExecutionException, InterruptedException {
-        //CustomThreadPool pool = new CustomThreadPool(10);
-        ExecutorService pool = ForkJoinPool.commonPool();
+        if(m1.getColumns() != m2.getRows()) throw new IllegalArgumentException();
+        //CustomThreadPool pool = new CustomThreadPool(4);
+         ExecutorService pool = ForkJoinPool.commonPool();
+        System.out.println("____PARaLEL____");
+
         List<Future<List<Integer>>> subs = new ArrayList<>();
 
-        for (int i = 0; i < m1.getColumns(); i++) {
+        for (int i = 0; i < m1.getRows(); i++) {
             subs.add(pool.submit(new Task(m1,m2,i)));
         }
 
