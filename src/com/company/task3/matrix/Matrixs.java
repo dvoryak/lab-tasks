@@ -58,26 +58,21 @@ public class Matrixs {
     }
 
     public static Matrix paralelMultiplyMatrix(Matrix m1, Matrix m2) throws ExecutionException, InterruptedException {
-        if(m1.getColumns() != m2.getRows()) throw new IllegalArgumentException();
-
-        //CustomThreadPool pool = new CustomThreadPool(5);
-        //ExecutorService pool = Executors.newFixedThreadPool(2);
+        //CustomThreadPool pool = new CustomThreadPool(10);
         ExecutorService pool = ForkJoinPool.commonPool();
-
-        Map<Integer,Future<Integer>> map = new HashMap<>();
+        List<Future<List<Integer>>> subs = new ArrayList<>();
 
         for (int i = 0; i < m1.getColumns(); i++) {
-            for (int j = 0; j < m2.getRows(); j++) {
-                map.put(j + (i * m1.getColumns()),pool.submit(new Task(m1,m2,i,j)));
-            }
+            subs.add(pool.submit(new Task(m1,m2,i)));
         }
+
 
         Matrix rez = generateEmptyMatrix(m1.getRows(),m2.getColumns());
 
-        int k = 0;
         for (int i = 0; i < rez.getRows(); i++) {
+            List<Integer> vec = subs.get(i).get();
             for (int j = 0; j < rez.getColumns(); j++) {
-                rez.setCell(i,j,map.get(k++).get());
+                rez.setCell(i,j,vec.get(j));
             }
         }
 
@@ -101,28 +96,32 @@ public class Matrixs {
      * ? ?
      *
      */
-    private static final class Task implements Callable<Integer> {
+    private static final class Task implements Callable<List<Integer>> {
 
         private Matrix m1;
         private Matrix m2;
         private int tn;
-        private int tm;
 
-        public Task(Matrix m1, Matrix m2, int tn,int tm) {
+        public Task(Matrix m1, Matrix m2, int tn) {
             this.m1 = m1;
             this.m2 = m2;
             this.tn = tn;
-            this.tm = tm;
         }
 
-        @Override
-        public Integer call() throws Exception {
-            int sum = 0;
 
-            for (int i = 0; i < m2.getColumns(); i++) {
-                sum = sum + m1.cell(tn,i) * m2.cell(i,tm);
+        // m1(n,m) * m2(m,k)
+        @Override
+        public List<Integer> call() throws Exception {
+            List<Integer> list = new ArrayList<>();
+            int sum = 0;
+            for (int k = 0; k < m2.getColumns(); k++) {
+                sum = 0;
+                for (int i = 0; i < m1.getColumns(); i++) {
+                    sum = sum + m1.cell(tn, i) * m2.cell(i, k);
+                }
+                list.add(sum);
             }
-            return sum;
+            return list;
         }
     }
 }
