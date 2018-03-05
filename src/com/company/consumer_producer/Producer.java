@@ -1,7 +1,6 @@
-package com.company.task1;
+package com.company.consumer_producer;
 
 import java.util.Queue;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Producer implements Runnable {

@@ -1,8 +1,5 @@
-package com.company.task3.matrix;
+package com.company.matrixmultiply_single_paralel.matrix;
 
-import java.io.ByteArrayInputStream;
-import java.io.PrintStream;
-import java.io.StringWriter;
 import java.util.Arrays;
 
 public class Matrix {

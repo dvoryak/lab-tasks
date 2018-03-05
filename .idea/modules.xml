@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/tasks.iml" filepath="$PROJECT_DIR$/tasks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab-tasks.iml" filepath="$PROJECT_DIR$/lab-tasks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab_pool23/git/src/main/main.iml" filepath="$PROJECT_DIR$/lab_pool23/git/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab_pool23/git/src/test/test.iml" filepath="$PROJECT_DIR$/lab_pool23/git/src/test/test.iml" />
     </modules>
   </component>
 </project>

@@ -1,7 +1,7 @@
-package com.company.task3;
+package com.company.matrixmultiply_single_paralel;
 
-import com.company.task3.matrix.Matrix;
-import com.company.task3.matrix.Matrixs;
+import com.company.matrixmultiply_single_paralel.matrix.Matrix;
+import com.company.matrixmultiply_single_paralel.matrix.Matrixs;
 
 import java.util.Date;
 import java.util.concurrent.ExecutionException;

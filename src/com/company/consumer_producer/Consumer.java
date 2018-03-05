@@ -1,4 +1,4 @@
-package com.company.task1;
+package com.company.consumer_producer;
 
 import java.util.Queue;
 

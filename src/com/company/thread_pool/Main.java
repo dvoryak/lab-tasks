@@ -1,4 +1,4 @@
-package com.company.task2;
+package com.company.thread_pool;
 
 import java.util.ArrayList;
 import java.util.List;

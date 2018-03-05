@@ -1,6 +1,4 @@
-package com.company.task3.matrix;
-
-import com.company.task2.CustomThreadPool;
+package com.company.matrixmultiply_single_paralel.matrix;
 
 import java.util.*;
 import java.util.concurrent.*;

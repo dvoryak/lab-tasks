@@ -1,8 +1,7 @@
-package com.company.task1;
+package com.company.consumer_producer;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
 
 public class Main {
 
