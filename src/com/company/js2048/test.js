@@ -1,38 +1,43 @@
+var n = 4;
+var matrix = new Array(4);
 
-document.addEventListener("DOMContentLoaded",function() {
-
-});
-
-
-
-function drawMatrix(matrix) {
-    var area = document.querySelector("area");
-
-    for (var i = 0; i < matrix.length; i++) {
-      for (var j = 0; j < matrix.length; j++) {
-        if(matrix[i][j] == 0) {
-
-        } else {
-
-        }
-        var el = document.createElement("div");
-        
-      }
+for (var i = 0; i < n; i++) {
+    matrix[i] = new Array(n);
+    for(var j = 0; j < n; j++) {
+      matrix[i][j] = 0;
     }
 }
 
+matrix[0][0] = 2;
+matrix[1][0] = 2;
 
-function initMatrix(size) {
-  var matrix = new Array(size);
+matrix[2][0] = 4;
+matrix[3][0] = 4;
 
-  for (var i = 0; i < size; i++) {
-      matrix[i] = new Array(size);
-      for(var j = 0; j < size; j++) {
+
+function getMatrix(n) {
+  var matrix = new Array(n);
+
+  for (var i = 0; i < n; i++) {
+      matrix[i] = new Array(n);
+      for(var j = 0; j < n; j++) {
         matrix[i][j] = 0;
       }
   }
 
+  return matrix;
 }
+
+function printMatrix(matrix) {
+  for (var i = 0; i < matrix.length; i++) {
+    var s = '';
+    for (var j = 0; j <  matrix[0].length; j++) {
+      s = s + matrix[i][j] + ' ';
+    }
+    console.log(s);
+  }
+}
+// **************
 
 function generetaCell(matrix) {
   var freeCells = getFreeCell(matrix);
@@ -148,3 +153,23 @@ function copy(o) {
    }
    return output;
 }
+
+
+
+
+/// ************
+printMatrix(matrix);
+console.log();
+//moveRight(matrix);
+//moveLeft(matrix);
+//moveUp(matrix);
+moveDown(matrix);
+//generetaCell(matrix);
+//generetaCell(matrix);
+//rotateMatrix(matrix);
+printMatrix(matrix);
+// ****
+
+console.log();
+
+// *****
