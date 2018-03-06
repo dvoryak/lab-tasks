@@ -9,10 +9,10 @@ for (var i = 0; i < n; i++) {
 }
 
 matrix[0][0] = 2;
-matrix[1][0] = 2;
+matrix[0][1] = 2;
 
-matrix[2][0] = 4;
-matrix[3][0] = 4;
+matrix[0][2] = 0;
+matrix[0][3] = 0;
 
 
 function getMatrix(n) {
@@ -74,30 +74,25 @@ function getRandomNumberBetwean(min,max) {
 
 function moveRight(matrix) {
   for (var i = 0; i < matrix.length; i++) {
-
+    alignLine(matrix[i]);
     for (var j = 0; j < matrix[0].length - 1; j++) {
-      if(matrix[i][j] != 0) {
-        if(matrix[i][j] == matrix[i][j+1]) {
-          matrix[i][j+1] = matrix[i][j] + matrix[i][j+1];
-          matrix[i][j] = 0;
-          j++;
-          alignLine(matrix[i]);
-        }
+      if(matrix[i][j] == matrix[i][j + 1]) {
+        matrix[i][j + 1] = matrix[i][j] + matrix[i][j + 1];
+        matrix[i][j] = 0;
       }
     }
-
   }
 }
 
 function alignLine(vector) {
-  for (var i = 0; i < vector.length - 1; i++) {
-    if(vector[i] != 0) {
-      if(vector[i + 1] == 0) {
-        var tmp = vector[i];
-        vector[i] = vector[i + 1];
-        vector[i + 1] = tmp;
+  for (var i = 0; i < vector.length; i++) {
+      for (var j = 0; j < vector.length; j++) {
+        if(vector[i] == 0) {
+          var tmp = vector[i];
+          vector[i] = vector[j];
+          vector[j] = tmp;
+        }
       }
-    }
   }
 }
 
@@ -163,7 +158,7 @@ console.log();
 //moveRight(matrix);
 //moveLeft(matrix);
 //moveUp(matrix);
-moveDown(matrix);
+moveRight(matrix);
 //generetaCell(matrix);
 //generetaCell(matrix);
 //rotateMatrix(matrix);

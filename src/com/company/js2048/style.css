@@ -6,21 +6,22 @@ body {
 #area {
     position: absolute;
     left: 10%;
-    border: 2px solid red;
-    height: 20vh;
-    width: 20vh;
+    height: 25vh;
+    width: 25vh;
 }
 
 .cell {
+
     position: absolute;
     left: 0;
     top: 0;
     height: 5vh;
     width: 5vh;
-    background-color: orange;
+    background-color: whitesmoke;
     float: left;
+    border: solid 1px greenyellow;
+    border-radius: 1vh;
+    text-align: center;
+    margin: auto;
 }
 
-div #area {
-
-}
