@@ -26,6 +26,7 @@ public class NonBlockingQueue<E> {
     private AtomicReference<Node<E>> head = new AtomicReference<>(nullNode);
     private AtomicReference<Node<E>> tail = new AtomicReference<>(nullNode);
 
+
     public boolean put(E item) {
         Node<E> newNode = new Node<>(item, null);
 
@@ -72,7 +73,6 @@ public class NonBlockingQueue<E> {
         size.decrementAndGet();
         return value;
 
-
     }
 
     public int size() {
@@ -111,7 +111,6 @@ public class NonBlockingQueue<E> {
                 e.printStackTrace();
             }
         });
-
 
         System.out.println(queue.size());
 
