@@ -1,67 +1,119 @@
 package com.company.nonblockingqueue;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class NonBlockingQueue<E> {
-    private static class Node <E> {
+
+    private AtomicInteger size = new AtomicInteger(0);
+
+    private static class Node<E> {
         final E item;
         final AtomicReference<Node<E>> next;
 
         Node(E item, Node<E> next) {
             this.item = item;
-            this.next = new AtomicReference<Node<E>>(next);
+            this.next = new AtomicReference<>(next);
         }
     }
 
-    private AtomicReference<Node<E>> head
-            = new AtomicReference<Node<E>>(new Node<E>(null, null));
-    private AtomicReference<Node<E>> tail = head;
+    private Node<E> nullNode = new Node<>(null, null);
+    private AtomicReference<Node<E>> head = new AtomicReference<>(nullNode);
+    private AtomicReference<Node<E>> tail = new AtomicReference<>(nullNode);
 
     public boolean put(E item) {
-        Node<E> newNode = new Node<E>(item, null);
+        Node<E> newNode = new Node<>(item, null);
+
         while (true) {
             Node<E> curTail = tail.get();
             Node<E> residue = curTail.next.get();
-
             if (curTail == tail.get()) {
-                if (residue == null) /* A */ {
-                    if (curTail.next.compareAndSet(null, newNode)) /* C */ {
-                        tail.compareAndSet(curTail, newNode) /* D */ ;
+                if (residue == null) {
+                    if (curTail.next.compareAndSet(null, newNode)) {
+                        tail.compareAndSet(curTail, newNode);
+                        size.incrementAndGet();
                         return true;
                     }
                 } else {
-                    tail.compareAndSet(curTail, residue) /* B */;
+                    tail.compareAndSet(curTail, residue);
                 }
             }
         }
     }
 
     public E pull() {
+        E value = null;
+        while (true) {
+            Node<E> currHead = head.get();
+            Node<E> currTail = tail.get();
+            Node<E> next = currHead.next.get();
 
-        System.out.println(head.get().item);
-
-       /* while(true) {
-            E item = head.get().item;
-            System.out.println(head.get().next);
-            if(head.compareAndSet(head.get(),head.get().next.get())) {
-                System.out.println(head.get());
-                return item;
+            if (head.get() == currHead) {
+                if (currHead == currTail) {
+                    if (next == null) {
+                        throw new NoSuchElementException();
+                    }
+                    tail.compareAndSet(currTail, next);
+                } else {
+                    value = next.item;
+                    if (head.compareAndSet(currHead, next)) {
+                        break;
+                    }
+                }
             }
-        }*/
 
-       return null;
+        }
+
+        size.decrementAndGet();
+        return value;
+
 
     }
 
+    public int size() {
+        return size.get();
+    }
+
     public static void main(String[] args) {
-        NonBlockingQueue queue = new NonBlockingQueue();
+        NonBlockingQueue<Integer> queue = new NonBlockingQueue<>();
 
-        queue.put(12);
-        queue.put(3);
-        queue.put(5);
+        // 5_000_000 of put operation
+        List<Thread> producer = Stream.generate(() -> new Thread(() -> {
+            for (int i = 0; i < 500_000; i++) {
+                queue.put(ThreadLocalRandom.current().nextInt(100));
+            }
+        })).limit(10).collect(Collectors.toList());
+        producer.forEach(Thread::start);
+        producer.forEach((t) -> {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
 
-        queue.pull();
+        // 1_000_000 of pull operation
+        List<Thread> consumer = Stream.generate(() -> new Thread(() -> {
+            for (int i = 0; i < 100_000; i++) {
+                queue.pull();
+            }
+        })).limit(10).collect(Collectors.toList());
+        consumer.forEach(Thread::start);
+        consumer.forEach((t) -> {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
 
-        //System.out.println(queue.pull());
+
+        System.out.println(queue.size());
+
     }
 }
