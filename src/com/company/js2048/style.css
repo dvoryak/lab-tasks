@@ -1,27 +1,199 @@
 body {
     position: relative;
-    background-color: aliceblue;
+    background-color: #f2f2f2;
+}
+
+#game {
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    left: 10px;
+    top: 10px;
+}
+
+#score {
+    position: absolute;
+    left: 40%;
+
 }
 
 #area {
     position: absolute;
     left: 10%;
-    height: 25vh;
-    width: 25vh;
+    top: 10%;
+    height: 30vh;
+    width: 30vh;
+    background-color: #bcaea1;
 }
 
 .cell {
-
     position: absolute;
-    left: 0;
-    top: 0;
-    height: 5vh;
-    width: 5vh;
-    background-color: whitesmoke;
-    float: left;
-    border: solid 1px greenyellow;
-    border-radius: 1vh;
+    height: 6vh;
+    width: 6vh;
+}
+
+.cell span {
+    color: #776d64;
+    font-size: 20px;
+}
+
+.cell0 {
+    background-color: #cdc1b4;
+    border-radius: 5px;
+}
+
+.cell2 {
+    color: #796e65;
+    line-height: 6vh;
+    background-color: #efe5db;
     text-align: center;
-    margin: auto;
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+.cell4 {
+    color: #796e65;
+    background-color: #eee1c9;
+    line-height: 6vh;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+.cell8 {
+    background-color: #f3b27a;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+.cell16 {
+    background-color: #f59663;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 22px;
+    border-radius: 5px;
+}
+
+.cell32 {
+    position: absolute;
+    background-color: #f67d61;
+    line-height: 6vh;
+    text-align: center;
+    font-size: 22px;
+    color: #f9faf7;
+    border-radius: 5px;
+}
+
+
+.cell64 {
+    background-color: #f55e39;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 22px;
+    border-radius: 5px;
+}
+
+.cell128 {
+    background-color: #edcf72;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.cell256 {
+    background-color: #edcc61;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.cell512 {
+    background-color: #eec84f;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.cell1024 {
+    background-color: #eec53e;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.cell2048 {
+    background-color: #edc22b;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.cell4096 {
+    background-color: #ff3a3d;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.cell8192 {
+    background-color: #ff1819;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.cell16384 {
+    background-color: #ff1819;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.cell32768 {
+    background-color: #ff1819;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.cell65536 {
+    background-color: #ff1819;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.cell131072 {
+    background-color: #ff1819;
+    line-height: 6vh;
+    text-align: center;
+    color: #f9faf7;
+    font-size: 13px;
+    border-radius: 5px;
 }
 
