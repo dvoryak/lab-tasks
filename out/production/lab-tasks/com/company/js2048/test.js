@@ -8,11 +8,11 @@ for (var i = 0; i < n; i++) {
     }
 }
 
-
 matrix[0][0] = 2;
-matrix[0][1] = 0;
+matrix[0][1] = 2;
+
 matrix[0][2] = 0;
-matrix[0][3] = 2;
+matrix[0][3] = 0;
 
 
 function getMatrix(n) {
@@ -72,53 +72,31 @@ function getRandomNumberBetwean(min,max) {
   return Math.round(Math.random() * (max - min) + min);
 }
 
-
 function moveRight(matrix) {
-    var canMove = false;
-    for (var i = 0; i < matrix.length; i++) {
-      if(alignLine(matrix[i]) && mergeLine(matrix[i])) {
-        if(!canMove) {
-          canMove = true;
-        }
+  for (var i = 0; i < matrix.length; i++) {
+    alignLine(matrix[i]);
+    for (var j = 0; j < matrix[0].length - 1; j++) {
+      if(matrix[i][j] == matrix[i][j + 1]) {
+        matrix[i][j + 1] = matrix[i][j] + matrix[i][j + 1];
+        matrix[i][j] = 0;
       }
-    }
-
-      //console.log(canMove);
-      if(canMove) {
-          generetaCell(matrix);
-      }
-}
-
-function mergeLine(vector) {
-  var isChanged = false;
-
-  for(var i = vector.length - 1; i > 0; i--) {
-    if(vector[i] != 0 && (vector[i] == vector[i - 1])) {
-      vector[i] *= 2;
-      vector[i - 1] = 0;
     }
   }
-
-  alignLine(vector);
-  return isChanged;
 }
 
 function alignLine(vector) {
-  var isChanged = false;
-  for (var i = vector.length; i > 1; i--) {
-          for (var j = vector.length - 1; j > 0; j--) {
-              if(vector[j] == 0 && vector[j - 1] != 0) {
-                  var tmp = vector[j];
-                  vector[j] = vector[j - 1];
-                  vector[j - 1] = tmp;
-                  isChanged = true;
-              }
-          }
-    }
-    return isChanged;
+  for (var i = 0; i < vector.length; i++) {
+      for (var j = 0; j < vector.length; j++) {
+        if(vector[i] == 0) {
+          var tmp = vector[i];
+          vector[i] = vector[j];
+          vector[j] = tmp;
+        }
+      }
+  }
 }
 
-function moveDown(matrix) {
+function moveUp(matrix) {
   rotateMatrix(matrix);
   moveRight(matrix);
   rotateMatrix(matrix);
@@ -126,7 +104,7 @@ function moveDown(matrix) {
   rotateMatrix(matrix);
 }
 
-function moveUp(matrix) {
+function moveDown(matrix) {
   rotateMatrix(matrix);
   rotateMatrix(matrix);
   rotateMatrix(matrix);
@@ -175,22 +153,18 @@ function copy(o) {
 
 
 /// ************
-//printMatrix(matrix);
-//console.log();
+printMatrix(matrix);
+console.log();
 //moveRight(matrix);
 //moveLeft(matrix);
-//moveRight(matrix);
-//var a = alignLine(matrix[0]);
-//console.log(a);
-//var b = mergeLine(matrix[0]);
-//console.log(b);
-//moveRight(matrix);
-//generateCell(matrix);
-//generateCell(matrix);
+//moveUp(matrix);
+moveRight(matrix);
+//generetaCell(matrix);
+//generetaCell(matrix);
 //rotateMatrix(matrix);
-//printMatrix(matrix);
+printMatrix(matrix);
 // ****
 
-console.log(Math.random());
+console.log();
 
 // *****
