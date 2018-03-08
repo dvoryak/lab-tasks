@@ -1,0 +1,27 @@
+body {
+    position: relative;
+    background-color: aliceblue;
+}
+
+#area {
+    position: absolute;
+    left: 10%;
+    height: 25vh;
+    width: 25vh;
+}
+
+.cell {
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 5vh;
+    width: 5vh;
+    background-color: whitesmoke;
+    float: left;
+    border: solid 1px greenyellow;
+    border-radius: 1vh;
+    text-align: center;
+    margin: auto;
+}
+
