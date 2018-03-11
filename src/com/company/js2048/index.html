@@ -9,11 +9,24 @@
 
 <script src="main.js" ></script>
 
+
+<div id="panel">
+    <li>Press ArrowLeft to move left</li>
+    <li>Press ArrowRight to move right</li>
+    <li>Press ArrowUp to move up</li>
+    <li>Press ArrowDown to move down</li>
+    <li>Press E to back</li>
+    <button onclick="(function f() {
+       document.querySelector('#panel').className = 'panel-hide';
+    }())">Hide </button>
+</div>
+
 <div id="game">
     <div id="score"> Score: 0</div>
     <div id="area">
     </div>
 </div>
+
 
 </body>
 </html>
